@@ -4,4 +4,4 @@
 
 > 记录
  
-- [ ] [pasition](https://github.com/fgoll/pasition)
+- [x] [pasition](https://github.com/fgoll/pasition)
