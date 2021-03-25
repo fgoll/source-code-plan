@@ -4,4 +4,4 @@
 
 > 记录
  
-- [x] [pasition](https://github.com/fgoll/pasition) -- [源码解析](https://github.com/fgoll/source-code-plan/issues/1)
+- [x] [pasition](https://github.com/fgoll/pasition) - [源码解析](https://github.com/fgoll/source-code-plan/issues/1)
