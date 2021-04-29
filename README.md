@@ -5,7 +5,7 @@
 > 记录
  
 - [x] [pasition](https://github.com/fgoll/pasition) - [源码解析](https://github.com/fgoll/source-code-plan/issues/1)
-- [ ] [rollup](https://github.com/rollup/rollup) 
+- [ ] [rollup](https://github.com/rollup/rollup/tree/v0.3.1/src) 
 - [ ] [acorn](https://github.com/acornjs/acorn)
 - [ ] [connect](https://github.com/senchalabs/connect)
 - [ ] [chokidar](https://github.com/paulmillr/chokidar)
