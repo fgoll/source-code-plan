@@ -1,0 +1,14 @@
+{
+  "name": "demo2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "rollup": "node rollup.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "rollup": "^0.3.1"
+  }
+}
