@@ -1,0 +1,1 @@
+{"version":3,"file":"bundle.js","sources":["..//Users/hongcha/Desktop/fgoll/source-code-plan/rollup/demo3/main.js","..//Users/hongcha/Desktop/fgoll/source-code-plan/rollup/demo3/mul.js"],"sourcesContent":["import { add } from './mul'\n\nconst b = add(10, 2)\nconsole.log(b)","export const add = (a, b) => a + b"],"names":[],"mappings":"AAAA;ACAA;ADEA;AACA"}

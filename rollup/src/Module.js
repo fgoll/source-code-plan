@@ -136,13 +136,26 @@ export default class Module {
     this.definitionPromises = {}
     this.modifications = {}
 
-    console.log('this.ast._scope.names', this.ast._scope.names)
+    this.ast.body.forEach( statement => {
+			Object.keys( statement._defines ).forEach( name => {
+				this.definitions[ name ] = statement;
+			});
+
+			Object.keys( statement._modifies ).forEach( name => {
+				if ( !has( this.modifications, name ) ) {
+					this.modifications[ name ] = [];
+				}
+
+				this.modifications[ name ].push( statement );
+			});
+		});
   }
 
   expandAllStatements(isEntryModule) {
     let allStatements = [];
 
     return sequence(this.ast.body, statement => {
+      
     	return this.expandStatement( statement )
         .then( statements => {
           allStatements.push.apply( allStatements, statements );
@@ -161,6 +174,7 @@ export default class Module {
 
     return sequence( dependencies, name => {
 			return this.define( name ).then( definition => {
+        console.log('definition', definition)
 				result.push.apply( result, definition );
 			});
 		}).then( () => {
@@ -171,11 +185,14 @@ export default class Module {
   }
 
   define( name ) {
+    if ( has( this.definitionPromises, name ) ) {
+			return emptyArrayPromise;
+		}
+
     let promise 
 
     if (has(this.imports, name)) {
       const importDeclaration = this.imports[name]
-
       promise = this.bundle.fetchModule(importDeclaration.source, this.path).then(module => {
         importDeclaration.module = module
 
@@ -196,12 +213,28 @@ export default class Module {
         const exportDeclaration = module.exports[ importDeclaration.name ];
 
         if ( !exportDeclaration ) {
+          console.log('err')
           throw new Error( `Module ${module.path} does not export ${importDeclaration.name} (imported by ${this.path})` );
         }
 
         return module.define( exportDeclaration.localName );
       })
-    }
+    }	else {
+			let statement;
+
+			if ( name === 'default' ) {
+				// TODO can we use this.definitions[ name ], as below?
+				statement = this.exports.default.node;
+			}
+
+			else {
+				statement = this.definitions[ name ];
+			}
+
+			if ( statement && !statement._included ) {
+				promise = this.expandStatement( statement );
+			}
+		}
     
 		this.definitionPromises[ name ] = promise || emptyArrayPromise;
 		return this.definitionPromises[ name ];

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "babel src -d dist",
-    "test": "node demo/rollup.js"
+    "test": "node demo3/rollup.js"
   },
   "author": "",
   "devDependencies": {
